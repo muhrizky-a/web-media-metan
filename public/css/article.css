@@ -1,0 +1,29 @@
+.article {
+    padding: 20px;
+}
+
+.article-header,
+.article-image {
+    margin: 20px 0;
+}
+
+.article-image img {
+    max-width: 100%;
+}
+
+.article-content p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.author-box {
+    display: flex;
+}
+
+.author-box .desc {
+    padding: 10px;
+}
+
+.aside {
+    margin: 20px 0;
+}

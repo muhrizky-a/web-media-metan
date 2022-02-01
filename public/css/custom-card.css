@@ -1,0 +1,39 @@
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.carousel-item img {
+    object-fit: cover;
+    max-height: 350px;
+}
+
+.image-card,
+.image-card .card-img {
+    border: none !important;
+    border-radius: 0 !important;
+    height: 300px;
+}
+
+.image-card .card-img {
+    object-fit: cover;
+}
+
+.image-card .card-img-overlay {
+    top: auto;
+    background: linear-gradient( to bottom, transparent, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+}
+
+.horizontal-card .img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-card {
+    margin: 5px;
+}
+
+.grid-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
