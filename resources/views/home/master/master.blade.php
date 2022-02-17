@@ -25,8 +25,12 @@
     <!-- <link href="{{ asset('img/logo_CJa_icon.ico') }}" rel="icon"> -->
     <link href="{{ asset('img/logo.png') }}" rel="icon">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    
     <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
     @yield('style')
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body>
@@ -34,7 +38,7 @@
         <div class="row">
             <div class="col">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/logo-full.png') }}" alt="Logo" height="100px">
+                    <img src="{{ asset('img/logo-metan-full-gold.png') }}" alt="Logo" height="100px">
             </div>
             </a>
             <div class="col">
@@ -45,16 +49,17 @@
         </div>
     </div>
     <main class="container bg-white">
-        @include("layout.header")
+
+        <x-header />
+        
         <div class="content">
             @yield('content')
         </div>
-        @include("layout.footer")
+        @include("home.layout.footer")
     </main>
 
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    
+    
     <!-- <script src="{{ asset('js/bootstrap.bundle.js') }}"></script> -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 

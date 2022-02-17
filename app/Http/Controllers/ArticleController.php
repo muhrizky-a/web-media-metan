@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Article;
+use App\Http\Controllers\CookieController;
 use App\Models\Category;
- 
+
 class ArticleController extends Controller
 {
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $title = $request->input('title');
         $category = $request->input('category');
         $author = $request->input('journalist');
         $content = $request->input('content');
         $file = $request->file('image');
         $caption = $request->input('image-caption');
-    
-        $tujuan_upload = 'article/images';
+
+        $tujuan_upload = 'img/article';
         // upload file
         $file->move($tujuan_upload, $file->getClientOriginalName());
 
@@ -34,21 +37,19 @@ class ArticleController extends Controller
         return redirect()->route('admin.article.list');
     }
 
-    public function getAll($paginate){
-        //Atur penggunaan pagination
-        
-        $artikel = ( isset($paginate)) ? Article::paginate($paginate) : Article::all();
-        
+    public static function getAll()
+    {
+        $article = Article::with(['category', 'journalist', 'comments'])->get();
 
-        foreach($artikel as $a) {
+        foreach ($article as $a) {
             $i = 0;
             $clean_content = "";
 
             $dirty_content_array = explode(" ", $a->content); // Memisahkan kata-kata content dalam bentuk array
-            foreach($dirty_content_array as $dca) {
+            foreach ($dirty_content_array as $dca) {
 
-                // Ambil 50 kata pertama dan gabungkan dengan clean_content
-                if($i <= 50){
+                // Ambil 20 kata pertama dan gabungkan dengan clean_content
+                if ($i <= 20) {
                     $clean_content .= " " . $dca;
                     $i += 1;
                 }
@@ -56,101 +57,137 @@ class ArticleController extends Controller
             $a->content = $clean_content . " . . .";
         }
 
-        $data = array(
-            'article_list' => $artikel
-        );
-
-        return $data;
+        return $article;
     }
 
-    private function getArticleById($id){
-        //Cari artikel dengan link
-        $article_detail = Article::find($id);
+    public function get($article)
+    {
+        $article->load('category', 'journalist', 'comments');
 
-        //Ambil kategori
-        $category = Category::where('id', $article_detail->category_id)->firstOrFail();
-        $article_detail->category = $category->name;
-        $article_detail->category_link = $category->link;
+        $new_created_datetime = new \DateTime($article->created_at);
+        $new_updated_datetime = new \DateTime($article->updated_at);
 
-        $new_created_datetime = new \DateTime($article_detail->created_at);
-        $new_updated_datetime = new \DateTime($article_detail->updated_at);
-
-        $article_detail->formated_created_date = $new_created_datetime->format("d F Y H:i:s");
-        $article_detail->formated_updated_date = $new_updated_datetime->format("d F Y H:i:s");
-
-        $data = array(
-            'article_detail' => $article_detail
-        );
-        return $data;
+        $article->formated_created_date = $new_created_datetime->format("d F Y H:i:s");
+        $article->formated_updated_date = $new_updated_datetime->format("d F Y H:i:s");
+        return $article;
     }
 
-    private function getArticleByName($link){
-        //Cari artikel dengan link
-        $article_detail = Article::where('link', $link)->firstOrFail();
-
-        //Ambil kategori
-        $category = Category::where('id', $article_detail->category_id)->firstOrFail();
-
-        $article_detail->category = $category->name;
-        $article_detail->category_link = $category->link;
-        $new_created_datetime = new \DateTime($article_detail->created_at);
-        $new_updated_datetime = new \DateTime($article_detail->updated_at);
-
-        $article_detail->formated_created_date = $new_created_datetime->format("d F Y H:i:s");
-        $article_detail->formated_updated_date = $new_updated_datetime->format("d F Y H:i:s");
-
-        $data = array(
-            'article_detail' => $article_detail
-        );
-        return $data;
+    public static function getWithCategory(Category $category) {
+        return  Article::where('category_id', $category->id)
+            ->orderBy('created_at', 'desc');
     }
- 
-    public function article_detail($name){
+
+
+    public function admin_article_list()
+    {
+        $article = Article::with(['category', 'journalist', 'comments'])->orderBy('created_at', 'desc')->paginate(5);
+        foreach ($article as $a) {
+            $i = 0;
+            $clean_content = "";
+
+            $dirty_content_array = explode(" ", $a->content); // Memisahkan kata-kata content dalam bentuk array
+            foreach ($dirty_content_array as $dca) {
+
+                // Ambil 20 kata pertama dan gabungkan dengan clean_content
+                if ($i <= 20) {
+                    $clean_content .= " " . $dca;
+                    $i += 1;
+                }
+            }
+            $a->content = $clean_content . " . . .";
+        }
+
+        return view('admin.article.list', [
+            'articles' => $article,
+        ]);
+    }
+
+    public function article_insert()
+    {
+        return view('admin.article.insert', [
+            'categories' => (new CategoryController)->getAll(),
+            'journalists' => (new JournalistController)->getAll()
+        ]);
+    }
+
+    public function admin_article_detail(Article $article)
+    {
+        $article = $this->get($article);
+
+        return view('admin.article.detail', [
+            'article_detail' => $article,
+        ]);
+    }
+
+
+    public function article_detail(Article $article, Request $request)
+    {
+        
         try {
-        $data = $this->getArticleByName($name);
-        return view('article-detail', $data);
+            $article = $this->get($article);
+            
+            //Tambah jumlah baca artikel
+            $cookie = CookieController::getCookie($request,$article->id);
+
+            if ( !$cookie ) {
+                $cookie = CookieController::setCookie($request,$article->id);
+                ArticlePageViewController::create($article->id);
+            }
+
+            return view('home.article.detail', [
+                'article' => $article,
+            ]);
         } catch (\Exception $e) {
-            return redirect()->route('home');
+            //return redirect()->route('home');
         }
     }
 
-    public function edit_article($id){
-        return view('home.edit_article', $this->get_article($id));
+    public function admin_article_update(Article $article)
+    {
+        $article_detail = $this->get($article);
+        $categories = (new CategoryController)->getAll();
+        $journalists = (new JournalistController)->getAll();
+
+        return view('admin.article.update', [
+            'article_detail' => $article_detail,
+            'categories' => $categories,
+            'journalists' => $journalists
+        ]);
     }
 
-     public function proses_edit_article(Request $request){
+    public function update(Request $request, Article $article)
+    {
+        $title = $request->input('title');
+        $category = $request->input('category');
+        $author = $request->input('journalist');
+        $content = $request->input('content');
+        $caption = $request->input('image-caption');
 
-        $judul = $request->input('judul');
-        $jenis_artikel = $request->input('tipe');
-        $isi_artikel = $request->input('isi');
+        /*
+        $file = $request->file('image');
+        $tujuan_upload = 'article-images';
+        // upload file
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+        */
 
+        $article->update([
+            'title' => $title,
+            'category_id' => $category,
+            'journalist_id' => $author,
+            'image_caption' => $caption,
+            'content' => $content
+        ]);
 
-        $article_update = Article::find( $request->input('id') );
-        $article_update->title = $judul;
-        $article_update->article_type = $jenis_artikel;
-        $article_update->content = $isi_artikel;
-
-        $article_update->save();
-
-        echo "<script type='text/javascript'>
-            alert('Update Data Berhasil');
-        </script>";
-
-        return redirect()->route('article.list');
+        return redirect()->route('admin.article.detail', $article);
     }
 
-     public function delete_article($id){
-        $article_delete = Article::find($id);
-        $article_delete->delete();
-        
+    public function delete(Article $article)
+    {
+        $article->delete();
+
         echo "<script type='text/javascript'>
             alert('Hapus Data Berhasil');
         </script>";
-        return redirect()->route('article.list');
+        return redirect()->route('admin.article.list');
     }
-
-    public function error(){
-        return view('home.error');
-    }
-
 }

@@ -13,4 +13,9 @@ class Journalist extends Model
     protected $fillable = [
         "name","status"
     ];
+
+    public function article()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

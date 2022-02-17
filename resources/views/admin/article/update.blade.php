@@ -1,7 +1,7 @@
 @extends("admin.master.master")
 
 @section('title')
-Buat Artikel
+Edit Artikel
 @endsection
 
 @section('style')
@@ -13,27 +13,29 @@ Buat Artikel
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Buat Artikel</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit Artikel</h1>
 
     </div>
 
     <!-- Content Row -->
-    <form class="row" action="{{ route('create.article')}}" method="post"  enctype="multipart/form-data">
+    <form class="row" action="{{ route('update.article', $article_detail) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
 
         <div class="col-12">
             <div class="form-group">
                 <label>Judul</label>
-                <input type="text" name="title" class="form-control" placeholder="Judul Berita" required>
+                <input type="text" name="title" class="form-control" placeholder="Judul Berita" required value="{{ $article_detail->title }}">
             </div>
         </div>
+
         <div class="col-12">
             <div class="form-group">
                 <label>Kategori</label>
                 <select name="category" class="form-control">
-                    @foreach($category_list as $row)
-                    <option value="{{ $row->id }}">{{ $row->name }}</option>
+                    @foreach($categories as $row)
+                    <option value="{{ $row->id }}" {{ $row->id == $article_detail->category->id ? "selected" : "" }}>{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -42,31 +44,31 @@ Buat Artikel
             <div class="form-group">
                 <label>Wartawan / Penulis</label>
                 <select name="journalist" class="form-control">
-                    @foreach($journalist_list as $row)
-                    <option value="{{ $row->id }}">{{ $row->name }}</option>
+                    @foreach($journalists as $row)
+                    <option value="{{ $row->id }}" {{ $row->id == $article_detail->journalist->id ? "selected" : "" }}>{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
         <div class="col-12">
-        <hr>
+            <hr>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Foto Artikel / Thumbnail</label>
-                <input type="file"  accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp" name="image" class="form-control" required>
+                <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp" name="image" class="form-control">
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Caption Foto Artikel</label>
-                <input type="text" name="image-caption" class="form-control" placeholder="Caption" required>
+                <input type="text" name="image-caption" class="form-control" placeholder="Caption" required value="{{ $article_detail->image_caption }}">
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Isi Konten Berita</label>
-                <textarea class="form-control" name="content" placeholder="Isi Konten Berita" required></textarea>
+                <textarea class="form-control" name="content" placeholder="Isi Konten Berita" required>{{ $article_detail->content }}</textarea>
             </div>
         </div>
         <div class="col-12">
@@ -77,5 +79,5 @@ Buat Artikel
     </form>
 
 </div>
-<!-- /.container-fluid -->
+
 @endsection

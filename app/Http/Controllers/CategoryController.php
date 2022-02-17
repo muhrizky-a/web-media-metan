@@ -8,7 +8,8 @@ use App\Http\Controllers\Functions;
 
 class CategoryController extends Controller
 {
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $name = $request->input('name');
 
         $new_category = new Category();
@@ -17,25 +18,30 @@ class CategoryController extends Controller
 
         $new_category->save();
 
-    
+
         return redirect()->route('admin.category.list');
     }
 
-    public function getAll(){
-        //Pagination yang menampilkan 10 artikel dalam 1 page
-        $categories = Category::all();
-        $data = array(
-            'category_list' => $categories
-        );
-        return $data;
+    public static function getAll()
+    {
+        return Category::all();
     }
 
-    private function get($id){
-        //Cari artikel dengan id = $id
-        $detail = Category::find($id);
-        if ($detail == NULL) {
-            return;   
-        }
-        return $detail;
+    public static function get($category)
+    {
+        $category->load('article')->paginate(2);
+        return $category;
+    }
+
+    public function admin_category_list()
+    {
+        return view('admin.category.list', [
+            'categories' => $this->getAll()
+        ]);
+    }
+
+    public function category_insert()
+    {
+        return view('admin.category.insert');
     }
 }

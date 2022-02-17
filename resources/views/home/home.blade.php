@@ -1,4 +1,4 @@
-@extends("master.master")
+@extends("home.master.master")
 
 @section('title')
 Home
@@ -6,17 +6,19 @@ Home
 
 @section('style')
 <link href="{{ asset('css/custom-card.css') }}" rel="stylesheet">
+<link href="{{ asset('css/loading.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 <!-- Begin Page Content -->
 <div class="home-news main-news">
-    <!-- <div class="card bg-dark text-white d-flex">
+    {{-- <div class="card bg-dark text-white d-flex">
         <img src="https://www.tambang.co.id/wp-content/uploads/2022/01/WhatsApp-Image-2022-01-24-at-16.21.40-537x360.jpeg" class="card-img" alt="Menteri Bahlil Sebut 85 Persen Pekerja Proyek DME Berasal dari Dalam Negeri">
         <div class="card-img-overlay">
             <h5 class="card-title">Menteri Bahlil Sebut 85 Persen Pekerja Proyek DME Berasal dari Dalam Negeri</h5>
         </div>
-    </div> -->
+    </div> --}}
+    
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -27,7 +29,7 @@ Home
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="https://www.tambang.co.id/wp-content/uploads/2020/01/menteri-esdm-arifin-tasrif-800x445-768x427.jpg" alt="Second slide">
-                
+
                 <div class="carousel-caption d-none d-md-block">
                     <h5>ESDM Ajak Kementerian dan Lembaga Percepat Konversi Kendaraan Listrik</h5>
                 </div>
@@ -127,38 +129,27 @@ Home
             </div>
         </div>
     </div>
-    <div class="news-category">
-        <h3>REGULASI</h3>
-        <div class="card mb-3 horizontal-card">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://www.tambang.co.id/wp-content/uploads/2015/05/indroyono.jpg" class="img-fluid rounded-start" alt="Pemerintah Kejar Eksplorasi Sektor Migas">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Pemerintah Kejar Eksplorasi Sektor Migas</h5>
-                        <small class="card-text"><a href="#" class="tags">REGULASI</a></small>
-                        <p class="card-text">Jakarta-TAMBANG. Salah satu yang menjadi perhatian pemerintah di sektor migas adalah kegiatan eksplorasi. Menteri Koordinator Kemaritiman Indroyono Soesilo mewakili Presiden Joko Widodo menegaskan bahwa...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-3 horizontal-card">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://www.tambang.co.id/wp-content/uploads/2021/05/PGN-Gas-Bumi-640x433.jpg" class="img-fluid rounded-start" alt="PGN Tetap Lanjutkan Proyek Interkoneksi Pipa SSWJ-West Java Area">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">PGN Tetap Lanjutkan Proyek Interkoneksi Pipa SSWJ-West Java Area</h5>
-                        <p class="card-text"><a href="#" class="tags bg-dark">REGULASI</a></p>
-                        <p class="card-text">Jakarta,TAMBANG,- Subholding Gas PT Perusahaan Gas Negara Tbk (PGN kehandalan jaringan maupun pasokan gas bumi tetap terjaga menjelang Idul Fitri 2021. Di sisi lain...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+</div>
+<div class="loading bg-dark">
+    <div class="loading-logo">
+        <img src="{{ asset('img/logo-metan-gold.png') }}" alt="PT. Media Tambang Production">
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+
+        //Fade loading screen
+        setTimeout(() => {
+            $( ".loading" ).fadeTo( "slow", 0 );
+        }, 1500);
+
+        //Hide loading screen
+        setTimeout(() => {
+            $(".loading").prop("hidden", 1);
+        }, 2500);
+    });
+</script>
 <!-- /.container-fluid -->
 @endsection

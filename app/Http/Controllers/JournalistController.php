@@ -11,16 +11,8 @@ class JournalistController extends Controller
         $name = $request->input('name');
         $status = $request->input('status');
         $file = $request->file('image');
-        
-        // nama file
-        echo 'File Name: ' . $file->getClientOriginalName();
-        echo '<br>';
-
-        // ukuran file
-        echo 'File Size: ' . $file->getSize();
-        echo '<br>';
-    
-        $tujuan_upload = 'journalist/images';
+            
+        $tujuan_upload = 'img/journalist';
         // upload file
         $file->move($tujuan_upload, $file->getClientOriginalName());
 
@@ -35,13 +27,9 @@ class JournalistController extends Controller
         return redirect()->route('admin.journalist.list');
     }
 
-    public function getAll(){
+    public static function getAll(){
         //Pagination yang menampilkan 10 artikel dalam 1 page
-        $categories = Journalist::all();
-        $data = array(
-            'journalist_list' => $categories
-        );
-        return $data;
+        return Journalist::all();;
     }
 
     private function get($id){
@@ -51,5 +39,16 @@ class JournalistController extends Controller
             return;   
         }
         return $detail;
+    }
+
+    public function admin_journalist_list()
+    {
+        return view('admin.journalist.list', [
+            'journalists' =>$this->getAll()  
+        ]);
+    }
+    public function journalist_insert()
+    {
+        return view('admin.journalist.insert');
     }
 }

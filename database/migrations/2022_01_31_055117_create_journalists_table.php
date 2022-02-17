@@ -30,6 +30,6 @@ class CreateJournalistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journalists');
+        //Schema::dropIfExists('journalists');
     }
 }

@@ -11,7 +11,32 @@ class Article extends Model
     protected $tables = 'articles';
 
     // Berisi nama kolom tabel yang dapat diisi
-    protected $fillable = [
-        "title", "content", "category_id", "image_url","link", "created_at", "updated_at"
+    protected $guarded = [
+        'id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function journalist()
+    {
+        return $this->belongsTo(Journalist::class);
+    }
+
+    /**
+     * Get the comments for the article.
+     */
+    public function comments()
+    {
+        return $this->hasMany(ArticleComment::class);
+    }
+
+    /*
+    public function getRouteKeyName()
+    {
+        return 'link';
+    }
+    */
 }
