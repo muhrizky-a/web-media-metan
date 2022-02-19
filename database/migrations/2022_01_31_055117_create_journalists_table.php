@@ -16,6 +16,9 @@ class CreateJournalistsTable extends Migration
         Schema::create('journalists', function (Blueprint $table) {
             $table->id();
             $table->string("name", 500);
+            $table->text("address");
+            $table->string("email", 100);
+            $table->string("contact", 13);
             $table->text("image_url");
             $table->enum('status', ['Aktif', 'Non Aktif']);
             $table->text("link");

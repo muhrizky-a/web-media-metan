@@ -10,8 +10,8 @@ class Journalist extends Model
     protected $primaryKey = 'id';
     protected $tables = 'journalists';
 
-    protected $fillable = [
-        "name","status"
+    protected $guarded = [
+        "id"
     ];
 
     public function article()

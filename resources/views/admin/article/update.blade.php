@@ -34,8 +34,9 @@ Edit Artikel
             <div class="form-group">
                 <label>Kategori</label>
                 <select name="category" class="form-control">
+
                     @foreach($categories as $row)
-                    <option value="{{ $row->id }}" {{ $row->id == $article_detail->category->id ? "selected" : "" }}>{{ $row->name }}</option>
+                    <option value="{{ $row->id }}" {{ $row->id == ($article_detail->category->id ?? -1) ? "selected" : "" }}>{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>

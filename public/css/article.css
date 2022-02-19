@@ -1,5 +1,6 @@
-.article {
-    padding: 20px;
+.article,
+.aside {
+    padding: 30px;
 }
 
 .article-header,
@@ -25,8 +26,4 @@
 
 .author-box .desc {
     padding: 10px;
-}
-
-.aside {
-    margin: 20px 0;
 }

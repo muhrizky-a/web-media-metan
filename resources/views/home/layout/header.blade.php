@@ -1,10 +1,9 @@
-<nav class="navbar d-block sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar d-block sticky-top navbar-expand-md navbar-dark bg-dark">
 
   <div class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand " href="{{ route('home') }}">
-        <!-- <img src="{{ asset('img/logo.png') }}" alt="Logo" height="36px"> -->
-        <h2 class="navbar-toggler">PT. METAN INDO PRODUCTION</h2>
+        <img src="{{ asset('img/logo-metan-gold.png') }}" alt="Logo" height="36px">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -33,14 +32,14 @@
       </div>
     </div>
 
-    <button class="btn btn-outline-success mx-4" type="button" data-bs-toggle="search-bar" data-bs-target="#searchNavbar" aria-controls="searchNavbar">Search</button>
+    
   </div>
-  <div class="container-fluid">
-    <form class="container-fluid py-2 search-bar" id="searchNavbar" aria-labelledby="searchNavbarLabel" action="{{ route('search') }}">
-      <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="Cari Artikel" aria-label="Username" aria-describedby="basic-addon1">
-        <button type="submit" class="input-group-text btn-outline-warning" style="color: black;">Cari</span>
-      </div>
-    </form>
-  </div>
+  
+  <form class="container-fluid py-2 search-bar" id="searchNavbar" aria-labelledby="searchNavbarLabel" action="{{ route('search') }}">
+    <div class="input-group">
+      <input type="text" class="form-control" name="q" placeholder="Cari Artikel" aria-label="Username" aria-describedby="basic-addon1">
+      <button type="submit" class="input-group-text btn-outline-warning" style="color: black;"><i class="fa fa-search" aria-hidden="true"></i></span>
+    </div>
+  </form>
+  
 </nav>

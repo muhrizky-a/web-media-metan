@@ -19,7 +19,7 @@ Daftar Artikel
     <!-- Content Row -->
     <div class="row">
         @foreach($articles as $row)
-
+        
         <div class="col-12">
             <div class="card mb-3 horizontal-card">
                 <div class="row g-0">
@@ -29,7 +29,8 @@ Daftar Artikel
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title"><a href="{{ route('admin.article.detail', $row->id) }}">{{ $row->title }}</a></h5>
-                            <small class="card-text"><a href="{{ route('admin.category.list', $row->category_id) }}" class="tags">{{ $row->category->name}}</a></small>
+
+                            <small class="card-text"><a href="{{ $row->category ? route('admin.category.detail', $row->category->id ) : route('admin.category.list' ) }}" class="tags">{{ $row->category->name ?? 'Uncategorized'}}</a></small>
                             <hr>
                             <p class="card-text">{{ $row->content }}
                                 <a href="{{ route('article.detail', $row) }}">Selengkapnya</a>

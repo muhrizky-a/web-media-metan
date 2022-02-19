@@ -24,7 +24,7 @@ Buat Kategori
         <div class="col-12">
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" name="name" class="form-control" placeholder="Nama Kategori">
+                <input type="text" name="name" class="form-control" placeholder="Nama Kategori" required>
             </div>
         </div>
         <div class="col-12">

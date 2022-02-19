@@ -9,7 +9,11 @@ class JournalistController extends Controller
 {
     public function create(Request $request){
         $name = $request->input('name');
+        $address = $request->input('address');
+        $contact = $request->input('contact');
+        $email = $request->input('email');
         $status = $request->input('status');
+
         $file = $request->file('image');
             
         $tujuan_upload = 'img/journalist';
@@ -18,6 +22,9 @@ class JournalistController extends Controller
 
         $new_data = new Journalist();
         $new_data->name = $name;
+        $new_data->address = $address;
+        $new_data->contact = $contact;
+        $new_data->email = $email;
         $new_data->image_url = $file->getClientOriginalName();
         $new_data->status = $status;
         $new_data->link = (new Functions)->createLink($name);
@@ -29,16 +36,7 @@ class JournalistController extends Controller
 
     public static function getAll(){
         //Pagination yang menampilkan 10 artikel dalam 1 page
-        return Journalist::all();;
-    }
-
-    private function get($id){
-        //Cari artikel dengan id = $id
-        $detail = Journalist::find($id);
-        if ($detail == NULL) {
-            return;   
-        }
-        return $detail;
+        return Journalist::with(['article'])->get();
     }
 
     public function admin_journalist_list()
@@ -47,8 +45,55 @@ class JournalistController extends Controller
             'journalists' =>$this->getAll()  
         ]);
     }
+
+
     public function journalist_insert()
     {
         return view('admin.journalist.insert');
     }
+
+    public function admin_journalist_update(Journalist $journalist)
+    {
+        return view('admin.journalist.update', [
+            'journalist' => $journalist
+        ]);
+    }
+
+    public function update(Request $request, Journalist $journalist)
+    {
+        
+        $name = $request->input('name');
+        $address = $request->input('address');
+        $contact = $request->input('contact');
+        $email = $request->input('email');
+        $status = $request->input('status');
+
+        /*
+        $file = $request->file('image');
+        $tujuan_upload = 'article-images';
+        // upload file
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+        */
+
+        $journalist->update([
+            'name' => $name,
+            'address' => $address,
+            'contact' => $contact,
+            'email' => $email,
+            'status' => $status
+        ]);
+
+        return redirect()->route('admin.journalist.list');
+    }
+
+    public function delete(Journalist $journalist)
+    {
+        $journalist->delete();
+
+        echo "<script type='text/javascript'>
+            alert('Hapus Data Berhasil');
+        </script>";
+        return redirect()->route('admin.journalist.list');
+    }
 }
+

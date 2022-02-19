@@ -29,6 +29,24 @@ Tambah Wartawan
         </div>
         <div class="col-12">
             <div class="form-group">
+                <label>Alamat</label>
+                <textarea name="address" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email Wartawan" required>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label>Kontak</label>
+                <input type="number" name="contact" class="form-control" placeholder="Kontak Wartawan" required>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
                 <label>Foto Profil</label>
                 <input type="file"  accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp" name="image" class="form-control" required>
             </div>

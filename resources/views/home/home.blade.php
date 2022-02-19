@@ -47,11 +47,12 @@ Home
 </div>
 <div class="home-news container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8">
             <div class="news-category">
                 <h3>BATU BARA</h3>
                 <div class="card mb-3 horizontal-card">
                     <div class="row g-0">
+                        
                         <div class="col-md-4">
                             <img src="https://www.tambang.co.id/wp-content/uploads/2021/10/Archi-Indonesia-Tambang-Emas-Toka-Tidung-1-640x427.jpg" class="img-fluid rounded-start" alt="Tak Penuhi Syarat, Pemerintah Tolak 460 RKAB Perusahaan Tambang">
                         </div>
@@ -102,9 +103,8 @@ Home
                 </div>
             </div>
         </div>
-        <div class="col-4 aside bg-gray">
-
-        </div>
+        <x-sidebar/>
+        
     </div>
     <div class="news-category">
         <h3>ENERGI</h3>

@@ -1,11 +1,11 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-black sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('img/logo.png') }}" alt="Logo" height="36px">
+            <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="48px">
         </div>
-        <div class="sidebar-brand-text mx-3">PT. METAN INDO PRODUCTION</div>
+        {{-- <div class="sidebar-brand-text mx-3">PT. METAN INDO PRODUCTION</div> --}}
     </a>
 
     <!-- Divider -->
@@ -47,5 +47,23 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.settings') }}">
+            <i class="fas fa-cog fa-newspaper"></i>
+            <span>Pengaturan</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        
+        <a class="nav-link" href="#" onclick="document.querySelector('#btn-logout').click();">
+            <i class="fas fa-sign-out fa-tag"></i>
+            <span>Logout</span>
+        </a>
+        <form action="{{ route('logout')}}" method="post">
+            @csrf
+            <button id="btn-logout" type="submit" name="submit" value="Logout" hidden></button>
+        </form>
+    </li>
 
 </ul>

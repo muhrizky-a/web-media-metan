@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title') - PT. METAN INDO PRODUCTION</title>
+    <title>@yield('title') - Media Tambang</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,8 +23,9 @@
 
     <!-- Custom styles for this template-->
     <!-- <link href="{{ asset('img/logo_CJa_icon.ico') }}" rel="icon"> -->
-    <link href="{{ asset('img/logo.png') }}" rel="icon">
+    <link href="{{ asset('img/logo-metan-gold.png') }}" rel="icon">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
     @yield('style')
@@ -38,7 +39,7 @@
         <div class="row">
             <div class="col">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/logo-metan-full-gold.png') }}" alt="Logo" height="100px">
+                    <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="100px">
             </div>
             </a>
             <div class="col">
@@ -48,12 +49,14 @@
             </div>
         </div>
     </div>
-    <main class="container bg-white">
+    <main class="container-lg bg-white">
 
         <x-header />
         
         <div class="content">
+            <div class="container-lg">
             @yield('content')
+            </div>
         </div>
         @include("home.layout.footer")
     </main>

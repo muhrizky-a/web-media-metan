@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Article;
+use App\Models\ArticlePageView;
 use App\Models\Category;
 
 
@@ -12,6 +13,18 @@ class HomeController extends Controller
 {
 
 
+    public function test()
+    {
+        $data = ArticlePageView::with(['article'])
+            ->get()
+            ->groupBy('article_id')
+            ->sortByDesc(function ($h) {
+                return $h->count();
+            })->take(5);
+
+        return $data;
+    }
+    
     public function home()
     {
         return view('home.home');
@@ -47,15 +60,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $q = $request->q;
-        $articles = Article::with(['category'])
-            ->where(
-                function ($query) use ($q) {
-                    $query->where('title', 'Like', "%$q%")
-                        ->orWhere('content', 'Like', "%$q%");
-                }
-            )
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
+        $articles = ArticleController::searchArticle($q);
 
         return view('home.search', [
             'search' => $q,
@@ -67,6 +72,12 @@ class HomeController extends Controller
     {
         return $this->admin_home();
     }
+
+    public function admin_login()
+    {
+        return view('admin.login');
+    }
+
     public function admin_home()
     {
         $articles = ArticleController::getAll()->count();
@@ -79,5 +90,14 @@ class HomeController extends Controller
             'journalists' => $journalists,
             'pageViews' => $pageViews
         ]);
+    }
+
+    public function admin_settings()
+    {
+        return $this->admin_home();
+    }
+    public function admin_logout()
+    {
+        return $this->admin_home();
     }
 }

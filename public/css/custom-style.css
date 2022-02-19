@@ -74,6 +74,10 @@ a:hover,
     background-color: orange;
 }
 
+.meta-item {
+    margin-right: 10px;
+}
+
 .form-group {
     margin-bottom: 1rem;
 }
@@ -88,8 +92,7 @@ a:hover,
 }
 
 .bg-gray {
-    /* background: linear-gradient( to bottom, #bcc6cc, #eee, #bcc6cc); */
-    background-color: #ccc;
+    background-color: #fefefe;
 }
 
 @media (max-width: 991px) {
@@ -99,10 +102,22 @@ a:hover,
     .search-bar.offcanvas.show {
         position: relative;
     }
+    .logo {
+        display: none;
+    }
+    .navbar-brand {
+        display: block;
+    }
 }
 
 @media (min-width: 992px) {
     .search-bar.offcanvas.show {
         visibility: hidden;
+    }
+    .logo {
+        display: block;
+    }
+    .navbar-brand {
+        display: none;
     }
 }

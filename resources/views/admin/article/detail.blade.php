@@ -28,7 +28,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('category.page', $article_detail->category->link) }}">{{ $article_detail->category->name }}</a></li>
+            @if( $article_detail->category )
+                <li class="breadcrumb-item"><a href="{{ route('admin.category.detail', $article_detail->category) }}">{{ $article_detail->category->name }}</a></li>
+            
+            @endif
             <li class="breadcrumb-item active" aria-current="page">{{ $article_detail->title }}</li>
         </ol>
     </nav>

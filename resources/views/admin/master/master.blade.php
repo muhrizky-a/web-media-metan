@@ -12,7 +12,7 @@
     <title>@yield('title') - PT. METAN INDO PRODUCTION</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('img/logo.png') }}" rel="icon">
+    <link href="{{ asset('img/logo-metan-gold.png') }}" rel="icon">
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     
     <!-- Custom styles for this template-->

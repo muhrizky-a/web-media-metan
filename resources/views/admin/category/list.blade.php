@@ -15,9 +15,16 @@ Kategori Artikel
     <!-- Content Row -->
     <div class="d-flex">
         @foreach($categories as $row)
-        <div style="padding: 5px;">
-        <h3><a href="{{ route('category.page', $row->link) }}" class="btn btn-primary">{{ $row->name }}</a></h3>
-        </div>
+        <div class="card mx-2 my-2">
+            <a href="{{ route('admin.category.detail', $row) }}"  class="card-header card-link">
+                {{ $row->name }}                
+            </a>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{ count($row->article)}} Artikel</li>
+              
+            </ul>
+          </div>
+        
         @endforeach
     </div>
 </div>

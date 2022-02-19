@@ -39,7 +39,7 @@ class ArticleController extends Controller
 
     public static function getAll()
     {
-        $article = Article::with(['category', 'journalist', 'comments'])->get();
+        $article = Article::with(['category', 'journalist', 'comments', 'page_views'])->get();
 
         foreach ($article as $a) {
             $i = 0;
@@ -62,7 +62,7 @@ class ArticleController extends Controller
 
     public function get($article)
     {
-        $article->load('category', 'journalist', 'comments');
+        $article->load('category', 'journalist', 'comments', 'page_views');
 
         $new_created_datetime = new \DateTime($article->created_at);
         $new_updated_datetime = new \DateTime($article->updated_at);
@@ -72,7 +72,21 @@ class ArticleController extends Controller
         return $article;
     }
 
-    public static function getWithCategory(Category $category) {
+    public static function searchArticle($q)
+    {
+        return Article::with(['category'])
+            ->where(
+                function ($query) use ($q) {
+                    $query->where('title', 'Like', "%$q%")
+                        ->orWhere('content', 'Like', "%$q%");
+                }
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+    }
+
+    public static function getWithCategory(Category $category)
+    {
         return  Article::where('category_id', $category->id)
             ->orderBy('created_at', 'desc');
     }
@@ -80,25 +94,27 @@ class ArticleController extends Controller
 
     public function admin_article_list()
     {
-        $article = Article::with(['category', 'journalist', 'comments'])->orderBy('created_at', 'desc')->paginate(5);
-        foreach ($article as $a) {
+        $articles = Article::with(['category'])->orderBy('created_at', 'desc')->paginate(5);
+
+        foreach ($articles as $a) {
             $i = 0;
             $clean_content = "";
 
-            $dirty_content_array = explode(" ", $a->content); // Memisahkan kata-kata content dalam bentuk array
-            foreach ($dirty_content_array as $dca) {
+            $raw_contents = explode(" ", $a->content); // Memisahkan kata-kata content dalam bentuk array
+            foreach ($raw_contents as $raw_content) {
 
                 // Ambil 20 kata pertama dan gabungkan dengan clean_content
                 if ($i <= 20) {
-                    $clean_content .= " " . $dca;
+                    $clean_content .= " " . $raw_content;
                     $i += 1;
                 }
             }
+
             $a->content = $clean_content . " . . .";
         }
 
         return view('admin.article.list', [
-            'articles' => $article,
+            'articles' => $articles,
         ]);
     }
 
@@ -122,20 +138,21 @@ class ArticleController extends Controller
 
     public function article_detail(Article $article, Request $request)
     {
-        
+
         try {
             $article = $this->get($article);
-            
-            //Tambah jumlah baca artikel
-            $cookie = CookieController::getCookie($request,$article->id);
 
-            if ( !$cookie ) {
-                $cookie = CookieController::setCookie($request,$article->id);
+            //Tambah jumlah baca artikel
+            $cookie = CookieController::getCookie($request, $article->id);
+
+            if (!$cookie) {
+                $cookie = CookieController::setCookie($request, $article->id);
                 ArticlePageViewController::create($article->id);
             }
-
+            
             return view('home.article.detail', [
                 'article' => $article,
+                'related_articles' => CategoryController::get($article->category)->article->sortByDesc('created_at')->take(3)
             ]);
         } catch (\Exception $e) {
             //return redirect()->route('home');
@@ -147,6 +164,8 @@ class ArticleController extends Controller
         $article_detail = $this->get($article);
         $categories = (new CategoryController)->getAll();
         $journalists = (new JournalistController)->getAll();
+
+
 
         return view('admin.article.update', [
             'article_detail' => $article_detail,

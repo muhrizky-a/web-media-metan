@@ -33,6 +33,11 @@ class Article extends Model
         return $this->hasMany(ArticleComment::class);
     }
 
+    public function page_views()
+    {
+        return $this->hasMany(ArticlePageView::class);
+    }
+
     /*
     public function getRouteKeyName()
     {
