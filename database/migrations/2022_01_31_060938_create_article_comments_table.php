@@ -35,6 +35,6 @@ class CreateArticleCommentsTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('article_comments');
+        Schema::dropIfExists('article_comments');
     }
 }

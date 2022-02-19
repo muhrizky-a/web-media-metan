@@ -13,7 +13,7 @@ class CreateArticlePageViewsTable extends Migration
      */
     public function up()
     {
-        
+
         Schema::create('article_page_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('article_id')

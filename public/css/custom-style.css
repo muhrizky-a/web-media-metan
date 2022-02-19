@@ -3,12 +3,14 @@ body {
 }
 
 .navbar-dark,
-.nav-link {
+.nav-link,
+.link {
     color: white !important;
 }
 
 .navbar-dark:hover,
-.nav-link:hover {
+.nav-link:hover,
+.link:hover {
     color: orange !important;
 }
 
@@ -92,7 +94,7 @@ a:hover,
 }
 
 .bg-gray {
-    background-color: #fefefe;
+    background-color: #fcfcfc;
 }
 
 @media (max-width: 991px) {

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/test', 'HomeController@test')->name("test");
 Route::get('/', 'HomeController@home')->name("home");
 Route::get('/cookie/set/{name}', 'CookieController@setCookie')->name("setCookie");
 Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie");
@@ -27,7 +27,7 @@ Route::post('logout', 'LoginController@logout')->name('logout');
 
 Route::middleware('auth')->group(function () {
     //For testing purpose
-    Route::get('/admin/test', 'HomeController@test')->name("test");
+    
 
     Route::get('/admin', 'HomeController@admin')->name("admin")->middleware('auth');
     Route::get('/admin/home', 'HomeController@admin_home')->name("admin.home");

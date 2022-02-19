@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
-use App\Models\Article;
-use App\Models\ArticlePageView;
 use App\Models\Category;
 
 
@@ -15,19 +14,20 @@ class HomeController extends Controller
 
     public function test()
     {
-        $data = ArticlePageView::with(['article'])
-            ->get()
-            ->groupBy('article_id')
-            ->sortByDesc(function ($h) {
-                return $h->count();
-            })->take(5);
+        $data = Article::with(['category'])->get()->sortByDesc('created_at')->take(3);
 
         return $data;
     }
-    
+
     public function home()
     {
-        return view('home.home');
+        $article_groups = Category::with(['article'])->get();
+        $newest_articles = Article::with(['category', 'journalist', 'comments', 'page_views'])->get()->sortByDesc('created_at')->take(3);
+
+        return view('home.home', [
+            'article_groups' => $article_groups,
+            'newest_articles' => $newest_articles
+        ]);
     }
 
     public function category(Category $category)
