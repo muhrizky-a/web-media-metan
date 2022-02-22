@@ -68,6 +68,21 @@ class HomeController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        return view('home.about');
+    }
+
+    public function contact()
+    {
+        return view('home.contact');
+    }
+
+    public function redaksi()
+    {
+        return view('home.redaksi');
+    }
+
     public function admin()
     {
         return $this->admin_home();
@@ -92,10 +107,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function admin_settings()
-    {
-        return $this->admin_home();
-    }
+
     public function admin_logout()
     {
         return $this->admin_home();

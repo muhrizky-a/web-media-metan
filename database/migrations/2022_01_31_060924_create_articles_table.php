@@ -21,7 +21,6 @@ class CreateArticlesTable extends Migration
             $table->text('image_caption');
             $table->text("link");
             $table->timestamps();
-
         });
     }
 
@@ -32,6 +31,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('articles');
+        Schema::dropIfExists('articles');
     }
 }

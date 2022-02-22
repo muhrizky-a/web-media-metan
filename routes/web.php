@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', 'HomeController@test')->name("test");
+//Route::get('/test', 'HomeController@test')->name("test");
 Route::get('/', 'HomeController@home')->name("home");
 Route::get('/cookie/set/{name}', 'CookieController@setCookie')->name("setCookie");
 Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie");
@@ -21,17 +21,21 @@ Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie"
 //Route::get('/category', 'HomeController@category')->name("category");
 Route::get('/category/{category:link}', 'HomeController@category')->name("category.page");
 Route::get('/search', 'HomeController@search')->name("search");
+Route::get('/tentang-kami', 'HomeController@about')->name("about");
+Route::get('/kontak', 'HomeController@contact')->name("contact");
+Route::get('/redaksi', 'HomeController@redaksi')->name("redaksi");
 
 Route::post('admin/auth', 'LoginController@authenticate')->name('admin.auth');
 Route::post('logout', 'LoginController@logout')->name('logout');
 
 Route::middleware('auth')->group(function () {
     //For testing purpose
-    
+
 
     Route::get('/admin', 'HomeController@admin')->name("admin")->middleware('auth');
     Route::get('/admin/home', 'HomeController@admin_home')->name("admin.home");
-    Route::get('/admin/settings', 'HomeController@admin_settings')->name("admin.settings");
+    Route::get('/admin/settings', 'AdminController@admin_settings')->name("admin.settings");
+    Route::post('/admin/change-password', 'AdminController@changePassword')->name('admin.change.password');
     Route::get('/admin/logout', 'HomeController@admin_logout')->name("admin.logout");
 
     Route::get('/admin/article', 'ArticleController@admin_article_list')->name("admin.article.list");

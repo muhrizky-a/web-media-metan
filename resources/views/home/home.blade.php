@@ -94,7 +94,7 @@
             <x-sidebar />
 
         </div>
-        <div class="news-category">
+        {{-- <div class="news-category">
             <h3>ENERGI</h3>
             <div class="card-group">
                 <div class="card grid-card">
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
     <div class="loading bg-dark">
