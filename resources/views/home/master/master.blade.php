@@ -19,6 +19,7 @@
             font-family: 'Nunito', sans-serif;
             background-color: #ddd;
         }
+
     </style>
 
     <!-- Custom styles for this template-->
@@ -26,7 +27,7 @@
     <link href="{{ asset('img/logo-metan-gold.png') }}" rel="icon">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
     <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
     @yield('style')
 
@@ -39,9 +40,12 @@
         <div class="row">
             <div class="col">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="100px">
+                    <div class="d-flex">
+                        <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="96px">
+                        <img src="{{ asset('img/logo-metan-typografy.png') }}" alt="Media Tambang" height="96px">
+                    </div>
+                </a>
             </div>
-            </a>
             <div class="col">
                 <!-- <div class="td-all-visible">
                     <a href="https://www.uvex-safety.co.id/id/kelompok-produk/uvex-u-chem-3500/"><img src="https://www.tambang.co.id/wp-content/uploads/2021/02/Banner_Jan-2020_Mobile_safe.png" alt=""></a>
@@ -52,17 +56,17 @@
     <main class="container-lg bg-white">
 
         <x-header />
-        
+
         <div class="content">
             <div class="container-lg">
-            @yield('content')
+                @yield('content')
             </div>
         </div>
         @include("home.layout.footer")
     </main>
 
-    
-    
+
+
     <!-- <script src="{{ asset('js/bootstrap.bundle.js') }}"></script> -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
