@@ -12,6 +12,11 @@
 - php artisan migrate
 - php artisan db:seed
 - php artisan serve
+- 
+## 2. Tambahkan Fitur Konten Page Dinamis (Page pada Footer)
+
+- php artisan migrate --path=database/migrations/footer
+- php artisan db:seed --class=FooterSeeder
 
 ## About Laravel
 
