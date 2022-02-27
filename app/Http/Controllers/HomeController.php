@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
-
+use App\Models\FooterPage;
 
 class HomeController extends Controller
 {
@@ -71,6 +71,13 @@ class HomeController extends Controller
     public function about()
     {
         return view('home.about');
+    }
+
+    public function footer(FooterPage $page)
+    {
+        return view('home.other-page-in-footer', [
+            'page' => $page,
+        ]);
     }
 
     public function contact()

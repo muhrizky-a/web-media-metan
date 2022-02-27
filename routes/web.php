@@ -20,23 +20,28 @@ Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie"
 
 //Route::get('/category', 'HomeController@category')->name("category");
 Route::get('/category/{category:link}', 'HomeController@category')->name("category.page");
-Route::get('/search', 'HomeController@search')->name("search");
+Route::get('/search', 'HomeController@footer')->name("search");
+Route::get('/pages/{page:url}', 'HomeController@footer')->name("footer");
+/*
 Route::get('/tentang-kami', 'HomeController@about')->name("about");
 Route::get('/kontak', 'HomeController@contact')->name("contact");
 Route::get('/redaksi', 'HomeController@redaksi')->name("redaksi");
-
+Route::get('/pedoman-media-siber', 'HomeController@pedoman')->name("pedoman");
+*/
 Route::post('admin/auth', 'LoginController@authenticate')->name('admin.auth');
 Route::post('logout', 'LoginController@logout')->name('logout');
 
 Route::middleware('auth')->group(function () {
-    //For testing purpose
-
-
     Route::get('/admin', 'HomeController@admin')->name("admin")->middleware('auth');
     Route::get('/admin/home', 'HomeController@admin_home')->name("admin.home");
     Route::get('/admin/settings', 'AdminController@admin_settings')->name("admin.settings");
     Route::post('/admin/change-password', 'AdminController@changePassword')->name('admin.change.password');
     Route::get('/admin/logout', 'HomeController@admin_logout')->name("admin.logout");
+
+
+
+    Route::get('/admin/footer/{page:url}', 'AdminController@footer')->name("admin.footer");
+    Route::put('/footer/update/{page}', 'AdminController@update_footer')->name("admin.update.footer");
 
     Route::get('/admin/article', 'ArticleController@admin_article_list')->name("admin.article.list");
     Route::get('/admin/article/detail/{article}', 'ArticleController@admin_article_detail')->name("admin.article.detail");

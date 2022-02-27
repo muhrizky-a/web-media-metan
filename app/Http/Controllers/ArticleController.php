@@ -149,7 +149,7 @@ class ArticleController extends Controller
                 $cookie = CookieController::setCookie($request, $article->id);
                 ArticlePageViewController::create($article->id);
             }
-            
+
             return view('home.article.detail', [
                 'article' => $article,
                 'related_articles' => CategoryController::get($article->category)->article->sortByDesc('created_at')->take(3)
@@ -164,7 +164,6 @@ class ArticleController extends Controller
         $article_detail = $this->get($article);
         $categories = (new CategoryController)->getAll();
         $journalists = (new JournalistController)->getAll();
-
 
 
         return view('admin.article.update', [

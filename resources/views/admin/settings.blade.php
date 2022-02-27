@@ -1,7 +1,7 @@
 @extends("admin.master.master")
 
 @section('title')
-    Admin Home
+    Pengaturan
 @endsection
 
 @section('style')

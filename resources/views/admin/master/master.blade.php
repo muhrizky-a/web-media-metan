@@ -8,16 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    @yield('meta')
 
     <title>@yield('title') - PT. METAN INDO PRODUCTION</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('img/logo-metan-gold.png') }}" rel="icon">
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    
+
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/admin-custom-style.css') }}" rel="stylesheet">
-    
+
     <link href="{{ asset('css/admin/sb-admin-2.min.css') }} " rel="stylesheet">
     @yield('style')
 
@@ -30,7 +31,7 @@
 
         <!-- Sidebar -->
         @include("admin.layout.sidebar")
-        
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -39,7 +40,7 @@
             <!-- Main Content -->
             <div id="content">
                 @include("admin.layout.header")
-				@yield('content')
+                @yield('content')
             </div>
             <!-- End of Main Content -->
 
