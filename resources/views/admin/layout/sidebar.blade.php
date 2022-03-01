@@ -1,9 +1,9 @@
 <ul class="navbar-nav bg-black sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="48px">
+            <img src="{{ asset('img/logo-metan-regular-full.png') }}" alt="Logo" height="48px">
         </div>
         {{-- <div class="sidebar-brand-text mx-3">PT. METAN INDO PRODUCTION</div> --}}
     </a>
@@ -87,12 +87,12 @@
         </a>
     </li>
     <li class="nav-item">
-        
+
         <a class="nav-link" href="#" onclick="document.querySelector('#btn-logout').click();">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
-        <form action="{{ route('logout')}}" method="post">
+        <form action="{{ route('logout') }}" method="post">
             @csrf
             <button id="btn-logout" type="submit" name="submit" value="Logout" hidden></button>
         </form>

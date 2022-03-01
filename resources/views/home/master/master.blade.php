@@ -38,11 +38,11 @@
 <body>
     <div class="container logo">
         <div class="row">
-            <div class="col">
+            <div class="col ps-0">
                 <a href="{{ route('home') }}">
                     <div class="d-flex">
-                        <img src="{{ asset('img/logo-metan-full.png') }}" alt="Logo" height="96px">
-                        <img src="{{ asset('img/logo-metan-typografy.png') }}" alt="Media Tambang" height="96px">
+                        <img src="{{ asset('img/logo-metan-regular-full.png') }}" alt="Logo" height="96px">
+                        {{-- <img src="{{ asset('img/logo-metan-tipografi.png') }}" alt="Media Tambang" height="96px"> --}}
                     </div>
                 </a>
             </div>
