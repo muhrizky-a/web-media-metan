@@ -41,7 +41,7 @@
             <div class="col ps-0">
                 <a href="{{ route('home') }}">
                     <div class="d-flex">
-                        <img src="{{ asset('img/logo-metan-regular-full.png') }}" alt="Logo" height="96px">
+                        <img src="{{ asset('img/logo-metan-regular-full.png') }}" alt="Logo" height="144px">
                         {{-- <img src="{{ asset('img/logo-metan-tipografi.png') }}" alt="Media Tambang" height="96px"> --}}
                     </div>
                 </a>
