@@ -6,7 +6,9 @@
 
 @section('style')
     <link href="{{ asset('css/article.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom-card.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/article.css') }}" rel="stylesheet">
+    <link href="{{ asset('/img/article/' . $article->image_url) }}" rel="image_src">
+    <meta property="og:image" content="{{ asset('/img/article/' . $article->image_url) }}" />
 @endsection
 
 @section('content')
