@@ -7,7 +7,8 @@ use App\Models\Journalist;
 
 class JournalistController extends Controller
 {
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $name = $request->input('name');
         $address = $request->input('address');
         $contact = $request->input('contact');
@@ -15,7 +16,7 @@ class JournalistController extends Controller
         $status = $request->input('status');
 
         $file = $request->file('image');
-            
+
         $tujuan_upload = 'img/journalist';
         // upload file
         $file->move($tujuan_upload, $file->getClientOriginalName());
@@ -30,11 +31,12 @@ class JournalistController extends Controller
         $new_data->link = (new Functions)->createLink($name);
         $new_data->save();
 
-    
+
         return redirect()->route('admin.journalist.list');
     }
 
-    public static function getAll(){
+    public static function getAll()
+    {
         //Pagination yang menampilkan 10 artikel dalam 1 page
         return Journalist::with(['article'])->get();
     }
@@ -42,7 +44,7 @@ class JournalistController extends Controller
     public function admin_journalist_list()
     {
         return view('admin.journalist.list', [
-            'journalists' =>$this->getAll()  
+            'journalists' => $this->getAll()
         ]);
     }
 
@@ -61,19 +63,27 @@ class JournalistController extends Controller
 
     public function update(Request $request, Journalist $journalist)
     {
-        
+
         $name = $request->input('name');
         $address = $request->input('address');
         $contact = $request->input('contact');
         $email = $request->input('email');
         $status = $request->input('status');
 
-        /*
-        $file = $request->file('image');
-        $tujuan_upload = 'article-images';
-        // upload file
-        $file->move($tujuan_upload, $file->getClientOriginalName());
-        */
+        $new_image = $request->file('image');
+        if ($new_image) {
+            $tujuan_upload = 'img/journalist';
+
+            $new_file_name = time() . '-' . $new_image->getClientOriginalName();
+
+            // upload file
+            $new_image->move($tujuan_upload, $new_file_name);
+            Functions::deleteFile($tujuan_upload, $journalist->image_url);
+
+            $journalist->update([
+                'image_url' => $new_file_name
+            ]);
+        }
 
         $journalist->update([
             'name' => $name,
@@ -96,4 +106,3 @@ class JournalistController extends Controller
         return redirect()->route('admin.journalist.list');
     }
 }
-

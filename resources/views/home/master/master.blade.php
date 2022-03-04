@@ -53,9 +53,10 @@
             </div>
         </div>
     </div>
+    <x-header />
     <main class="container-lg bg-white">
 
-        <x-header />
+
 
         <div class="content">
             <div class="container-lg">

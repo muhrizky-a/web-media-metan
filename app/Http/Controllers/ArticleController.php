@@ -29,7 +29,7 @@ class ArticleController extends Controller
         $artikel_baru->link = (new Functions)->createLink($title);
         $artikel_baru->category_id = $category;
         $artikel_baru->journalist_id = $author;
-        $artikel_baru->image_url = $file->getClientOriginalName();
+        $artikel_baru->image_url = $file->getClientOriginalName() . time();
         $artikel_baru->image_caption = $caption;
         $artikel_baru->content = $content;
 
@@ -165,7 +165,6 @@ class ArticleController extends Controller
         $categories = (new CategoryController)->getAll();
         $journalists = (new JournalistController)->getAll();
 
-
         return view('admin.article.update', [
             'article_detail' => $article_detail,
             'categories' => $categories,
@@ -181,19 +180,28 @@ class ArticleController extends Controller
         $content = $request->input('content');
         $caption = $request->input('image-caption');
 
-        /*
-        $file = $request->file('image');
-        $tujuan_upload = 'article-images';
-        // upload file
-        $file->move($tujuan_upload, $file->getClientOriginalName());
-        */
+
+        $new_image = $request->file('image');
+        if ($new_image) {
+            $tujuan_upload = 'img/article';
+
+            $new_file_name = time() . '-' . $new_image->getClientOriginalName();
+
+            // upload file
+            $new_image->move($tujuan_upload, $new_file_name);
+            Functions::deleteFile($tujuan_upload, $article->image_url);
+
+            $article->update([
+                'image_url' => $new_file_name
+            ]);
+        }
 
         $article->update([
             'title' => $title,
             'category_id' => $category,
             'journalist_id' => $author,
             'image_caption' => $caption,
-            'content' => $content
+            'content' => $content,
         ]);
 
         return redirect()->route('admin.article.detail', $article);

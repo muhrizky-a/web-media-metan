@@ -84,6 +84,12 @@ a:hover,
     margin-bottom: 1rem;
 }
 
+.footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
 .footer-link a {
     text-decoration: none;
     color: white;
@@ -95,6 +101,21 @@ a:hover,
 
 .bg-gray {
     background-color: #fcfcfc;
+}
+
+@media (max-width: 767px) {
+    .footer {
+        flex-direction: column-reverse;
+    }
+    .footer>* {
+        margin: auto;
+    }
+    .copyright {
+        text-align: center;
+    }
+    .footer>.footer-link {
+        margin-bottom: 1rem;
+    }
 }
 
 @media (max-width: 991px) {

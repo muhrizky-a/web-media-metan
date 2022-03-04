@@ -30,6 +30,9 @@
         </form>
 
     </div>
+@endsection
+
+@section('script')
     <script src="{{ asset('js/trix.js') }}"></script>
     <script src="{{ asset('js/trix-custom.js') }}"></script>
 @endsection

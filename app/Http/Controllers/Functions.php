@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class Functions extends Controller
 {
@@ -26,5 +27,10 @@ class Functions extends Controller
             $i++;
         }
         return $link;
+    }
+
+    public static function deleteFile($path, $filename)
+    {
+        File::delete($path . '/' . $filename);
     }
 }
