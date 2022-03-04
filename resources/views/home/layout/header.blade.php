@@ -20,7 +20,7 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                    <ul class="navbar-nav justify-content-around flex-grow-1 pe-3">
 
                         @foreach ($categories as $category)
                             <li class="nav-item">
