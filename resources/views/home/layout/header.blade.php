@@ -2,8 +2,8 @@
 
     <div class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand " href="{{ route('home') }}">
-                <img src="{{ asset('img/logo-metan-regular-full.png') }}" alt="Logo" height="72px">
+            <a class="navbar-brand mx-auto" href="{{ route('home') }}">
+                <img src="{{ asset('img/logo-metan-tipografi-2.png') }}" alt="Logo" height="72px">
                 {{-- <img src="{{ asset('img/logo-metan-tipografi.png') }}" alt="Media Tambang" height="36px"> --}}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
