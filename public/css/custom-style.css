@@ -103,6 +103,12 @@ a:hover,
     background-color: #fcfcfc;
 }
 
+@media (max-width: 575px) {
+    .home-news {
+        display: none;
+    }
+}
+
 @media (max-width: 767px) {
     .footer {
         flex-direction: column-reverse;
