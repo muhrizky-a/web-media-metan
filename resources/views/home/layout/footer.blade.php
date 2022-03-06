@@ -8,8 +8,8 @@
 
     <div class="footer-link">
         <a href="{{ route('footer', 'tentang-kami') }}" class="me-2">Tentang Kami</a>
-        <a href="{{ route('footer', 'kontak') }}" class="me-2">Kontak</a>
-        <a href="{{ route('footer', 'redaksi') }}" class="me-2">Redaksi</a>
+        {{-- <a href="{{ route('footer', 'kontak') }}" class="me-2">Kontak</a> --}}
+        {{-- <a href="{{ route('footer', 'redaksi') }}" class="me-2">Redaksi</a> --}}
         <a href="{{ route('footer', 'pedoman-media-siber') }}" class="me-2">Pedoman Media Siber</a>
     </div>
 </footer>
