@@ -60,12 +60,12 @@
 
     </div>
 
-    <div class="home-news container">
+    <div class="home-news">
         <div class="row">
             <div class="col-lg-8">
                 @foreach ($article_groups as $article_group)
-                    <div class="news-category">
-                        @if (count($article_group->article) > 0)
+                    @if (count($article_group->article) > 0)
+                        <div class="news-category">
                             <h3>{{ $article_group->name }}</h3>
                             @foreach ($article_group->article->sortByDesc('created_at')->take(3) as $article)
                                 <div class="card mb-3 horizontal-card">
@@ -87,8 +87,8 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 @endforeach
             </div>
             <x-sidebar />
