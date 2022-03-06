@@ -20,7 +20,7 @@ Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie"
 
 //Route::get('/category', 'HomeController@category')->name("category");
 Route::get('/category/{category:link}', 'HomeController@category')->name("category.page");
-Route::get('/search', 'HomeController@footer')->name("search");
+Route::get('/search', 'HomeController@search')->name("search");
 Route::get('/pages/{page:url}', 'HomeController@footer')->name("footer");
 /*
 Route::get('/tentang-kami', 'HomeController@about')->name("about");

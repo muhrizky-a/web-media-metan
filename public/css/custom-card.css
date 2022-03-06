@@ -52,6 +52,13 @@
     overflow: hidden;
 }
 
+.horizontal-card .card-title a {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 @media screen and (min-width: 1140px) {
     .horizontal-card {
         max-height: 250px;

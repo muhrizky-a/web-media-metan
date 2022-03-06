@@ -70,11 +70,11 @@
                             @foreach ($article_group->article->sortByDesc('created_at')->take(3) as $article)
                                 <div class="card mb-3 horizontal-card">
                                     <div class="row g-0">
-                                        <div class="col-md-4">
+                                        <div class="col-sm-4">
                                             <img src="{{ asset('/img/article/' . $article->image_url) }}"
                                                 class="img-fluid rounded-start" alt="{{ $article->title }}">
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-sm-8">
                                             <div class="card-body">
                                                 <h5 class="card-title">
                                                     <a
