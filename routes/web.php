@@ -18,7 +18,6 @@ Route::get('/', 'HomeController@home')->name("home");
 Route::get('/cookie/set/{name}', 'CookieController@setCookie')->name("setCookie");
 Route::get('/cookie/get/{name}', 'CookieController@getCookie')->name("getCookie");
 
-//Route::get('/category', 'HomeController@category')->name("category");
 Route::get('/category/{category:link}', 'HomeController@category')->name("category.page");
 Route::get('/search', 'HomeController@search')->name("search");
 Route::get('/pages/{page:url}', 'HomeController@footer')->name("footer");

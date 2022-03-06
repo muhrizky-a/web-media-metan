@@ -1,7 +1,7 @@
 @extends("home.master.master")
 
 @section('title')
-    Hasil pencarian testing123
+    Hasil pencarian {{ $search }}
 @endsection
 
 @section('style')
